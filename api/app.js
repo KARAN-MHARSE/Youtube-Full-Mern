@@ -1,5 +1,5 @@
 const express = require('express')
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
 const cors = require('cors')
 const dotenv = require('dotenv')
 dotenv.config()
@@ -15,9 +15,14 @@ app.use(cookieParser())
 // Routes
 const authRoute = require('./src/routes/auth.route')
 const videoRoute = require('./src/routes/video.route')
+const channelRoute = require('./src/routes/channel.route')
+const subscriptionRouter = require('./src/routes/subscription.route')
 // Initialise the router
 app.use('/api/v1/user/auth',authRoute)
 app.use('/api/v1/user/video',videoRoute)
+app.use('/api/v1/user/channel',channelRoute)
+app.use('/api/v1/channel/subcription',subscriptionRouter)
+
 
 
 // Erro handling middleware

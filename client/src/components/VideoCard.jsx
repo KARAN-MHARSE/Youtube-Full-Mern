@@ -8,7 +8,7 @@ function VideoCard({video}) {
     <Link to={`/watch/${video?._id}`}>
     <div className='text-lightText hover:bg-gray-500 rounded-lg overflow-hidden sm:max-w-[280px] max-w-[200px]'>
         <img 
-            className='rounded-lg w-full'
+            className='rounded-lg w-full h-[170px]'
             src={video?.thumbnailUrl} 
             alt="" 
         />

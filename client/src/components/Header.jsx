@@ -4,24 +4,32 @@ import { AiOutlineVideoCameraAdd } from "react-icons/ai";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { GoVideo } from "react-icons/go";
 import { BsBroadcast } from "react-icons/bs";
-import {Link} from 'react-router-dom'
+import {Link, Navigate, useNavigate} from 'react-router-dom'
 import { useState } from "react";
 import { useSelector ,useDispatch} from "react-redux";
 import {setIsSignInPage} from '../redux/user/userSlice'
+import { VscSignOut } from "react-icons/vsc";
 
 
 function Header() {
   const user = useSelector(state=>state.currentUser)
   const dispatch = useDispatch()
-  console.log(user)
-  
+  const navigate = useNavigate()
+  // console.log(user)
+
+  const [uploadPopUp,setUploadPopUp] = useState(false)
+  const [showProfikePopUp,setShowProfilePopUp] = useState(false)
+  console.log(showProfikePopUp)
+
   // When user click on any thing expent login button then setIsSign false
   const setIsLogin = (e)=>{
     e.preventDefault();
+    navigate('/')
     dispatch(setIsSignInPage(false));
   }
+  
 
-  const [uploadPopUp,setUploadPopUp] = useState(false)
+  
   // console.log(uploadPopUp)
   return (
     <div className='px-4 sm:px-6 py-2 flex justify-between items-center bg-[#10131A] sticky top-0 left-0'>
@@ -86,9 +94,30 @@ function Header() {
         {
           user?
           (
-            <div className="text-white font-semibold bg-blue-500 size-[35px] flex items-center justify-center rounded-full">
-              <p>{user.profile}</p>
-            </div>
+            <div>
+              <div 
+              onClick={()=>{setShowProfilePopUp(!showProfikePopUp)}}
+              className="text-white font-semibold cursor-pointer bg-blue-500 size-[35px] flex items-center justify-center rounded-full">
+                <p>{user.userName.charAt(0).toUpperCase()}</p>
+              </div>
+              {/* show profile popup */}
+              {
+                showProfikePopUp && (
+                  <div className="absolute top-[72px] right-5 bg-cardBg p-3 rounded-lg">
+                    <Link to='/you'>
+                      <p
+                      className="flex gap-2 items-center text-[18px] mb-2 text-white font-semibold hover:text-red-700"
+                      ><GoVideo/>You</p>
+                    </Link>
+                    <p
+                    className="flex gap-2 items-center text-[18px] text-white font-semibold hover:text-red-700"
+                    ><VscSignOut/>SignOut</p>
+                  </div>
+                )
+              }
+
+
+            </div>            
           ):
           (
             <Link to='/login'>

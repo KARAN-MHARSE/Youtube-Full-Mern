@@ -1,9 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const {uploadVideo,getAllVideos,getVideoById} = require('../controllers/video.controller')
+const {uploadVideo,getAllVideos,getVideoById,karan} = require('../controllers/video.controller')
 const {upload} = require('../middlewares/multer')
+const {verifyJwt} = require('../middlewares/auth.middleware')
 
-router.route('/upload').post(
+router.route('/upload').post(verifyJwt,
     upload.fields([
         {
             name:"videoUrl",
@@ -20,4 +21,6 @@ router.route('/upload').post(
 
 router.route('/getAllVideos').get(getAllVideos)
 router.route('/getVideoByID/:videoId').get(getVideoById)
+// router.route('/getVideo/:videoId').get(karan)
+
 module.exports = router

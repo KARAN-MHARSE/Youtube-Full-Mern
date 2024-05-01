@@ -53,18 +53,19 @@ const login = AsyncHandler(async(req,res)=>{
         throw new ApiError(401,"Invalid credentials")
     }
 
-    const refreshToken = await user.generateRefreshToken()
+    const token = await user.generateRefreshToken()
+    console.log(token)
 
     const loggedUser = await User.findById(user._id).select("-password -refreshToken")
-
     const options = {
-        httpOnly:true,
-        secure:true
-    }
+        httpOnly: false, // Set to false to allow client-side access
+        secure: false, // Set to false for local development serve
+        maxAge: 31536000000, // 1 year
+      };
 
     res
     .status(200)
-    .cookie('refreshToken',refreshToken)
+    .cookie("token", "token")
     .json({
         success:true,
         user:loggedUser

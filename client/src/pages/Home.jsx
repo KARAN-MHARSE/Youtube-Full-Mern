@@ -25,8 +25,8 @@ function Home() {
       <div className='flex gap-3 overflow-x-auto hideScrollbar flex-shrink-0 mb-5'>
         {
           contectType.map((data,index)=>(
-            <Link to={`/#${data}`}>
-              <FilterCard data={data} key={index}/>
+            <Link key={index} to={`/#${data}`}>
+              <FilterCard data={data}/>
             </Link>
           ))
         }

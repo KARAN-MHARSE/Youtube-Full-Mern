@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const aggregatePaginate = require("mongoose-aggregate-paginate-v2");
+
 
 const userSchema = new mongoose.Schema({
     userName:{
@@ -38,6 +40,8 @@ const userSchema = new mongoose.Schema({
 },{
     timestamps:true
 })
+
+userSchema.plugin(aggregatePaginate)
 
 userSchema.pre('save',async function(next){
     if(!this.isModified('password')){
