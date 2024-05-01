@@ -121,6 +121,32 @@ const getVideoById = AsyncHandler(async(req,res)=>{
     })
 })
 
+const doComment = AsyncHandler(async(req,res)=>{
+  const {videoId} = req.params
+  const {commentBy,comment} = req.body
+  console.log(req.body)
+
+  if(!commentBy){
+    throw new ApiError(404,"Unauthorized user")
+  }
+
+  const video = await Video.findById(videoId)
+
+  if(!video){
+    throw new ApiError(400,"video does not exist")
+  }
+
+  video.comments.push({commentBy,comment})
+  await video.save()
+
+  res
+  .status(201)
+  .json({
+    success:true,
+    video,
+    error:false
+  })
+})
 
 
-module.exports = {uploadVideo,getAllVideos,getVideoById}
+module.exports = {uploadVideo,getAllVideos,getVideoById,doComment}

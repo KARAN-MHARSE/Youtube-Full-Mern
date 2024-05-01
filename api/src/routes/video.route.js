@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {uploadVideo,getAllVideos,getVideoById,karan} = require('../controllers/video.controller')
+const {uploadVideo,getAllVideos,getVideoById,doComment} = require('../controllers/video.controller')
 const {upload} = require('../middlewares/multer')
 const {verifyJwt} = require('../middlewares/auth.middleware')
 
@@ -20,7 +20,9 @@ router.route('/upload').post(verifyJwt,
 );
 
 router.route('/getAllVideos').get(getAllVideos)
-router.route('/getVideoByID/:videoId').get(getVideoById)
+router.route('/getVideoByID/:videoId').get(getVideoById).post(doComment)
+router.route('/getVideoByID/doComment/:videoId').post(doComment)
+
 // router.route('/getVideo/:videoId').get(karan)
 
 module.exports = router
