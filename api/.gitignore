@@ -1,5 +1,6 @@
 # dependencies
 /node_modules
+src/utils/credentials.json
 
 # log files
 logs
