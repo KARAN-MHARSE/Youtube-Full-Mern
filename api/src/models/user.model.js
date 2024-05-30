@@ -30,6 +30,11 @@ const userSchema = new mongoose.Schema({
     profile:{
         type:String,
     },
+    watchVideos:[
+        {video:{
+            type:mongoose.Schema.Types.ObjectId
+        }}
+    ],
     password:{
         type:String,
         required:true
