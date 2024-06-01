@@ -8,13 +8,22 @@ const doSubscribed = AsyncHandler(async (req, res) => {
   const { ownerId, currentUserId } = req.body;
   // console.log(ownerId)
 
+  const alreadySubscribed = await Subscription.findOne({
+    subscriber: currentUserId,
+    channel: ownerId,
+  });
+  if (alreadySubscribed) {
+    await Subscription.findByIdAndDelete(alreadySubscribed._id);
+    return res.json({ success: true, message: "UnSubscribed Succesfully" });
+  }
+
   // const alreadySubscribed = await Subscription({})
   const doSubscribe = await Subscription.create({
     subscriber: currentUserId,
     channel: ownerId,
   });
 
-  res.json({ doSubscribe });
+  return res.json({ success: true, message: "Subscribed Succesfully" });
 });
 
 const getSubscribedChannelVideos = AsyncHandler(async (req, res) => {

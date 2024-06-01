@@ -48,6 +48,7 @@ function WatchVideo() {
       const data2 = await res2.json();
 
       setVideoList(data2);
+      // console.log(videoList);
 
       // add to watch  video
       if (currentUser) {
@@ -87,7 +88,7 @@ function WatchVideo() {
         }
       );
       const data = await res.json();
-      alert("Succesfully Subscribed");
+      alert(data.message);
     } else {
       alert("Firstly do login");
     }
@@ -223,7 +224,7 @@ function WatchVideo() {
                         {video.title}
                       </h1>
                       <p className="text-[13px] text-[#ffffff80] mt-2">
-                        Karan Mharse
+                        {video.ownerName}
                       </p>
                       <div className="text-[13px] flex gap-2 text-[#ffffff80]">
                         <p>134k views .</p>
