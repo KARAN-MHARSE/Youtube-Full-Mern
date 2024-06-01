@@ -7,6 +7,7 @@ import { BsBroadcast } from "react-icons/bs";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { signInSuccess } from "../redux/user/userSlice";
 import { setIsSignInPage } from "../redux/user/userSlice";
 import { VscSignOut } from "react-icons/vsc";
 import { IoMdArrowRoundBack } from "react-icons/io";
@@ -28,6 +29,13 @@ function Header() {
     e.preventDefault();
     navigate("/");
     dispatch(setIsSignInPage(false));
+  };
+
+  const handleSignOut = (e) => {
+    e.preventDefault();
+
+    dispatch(signInSuccess(false));
+    setShowProfilePopUp(false);
   };
 
   const handleSearch = async (e) => {
@@ -150,7 +158,10 @@ function Header() {
                     You
                   </p>
                 </Link>
-                <p className="flex gap-2 items-center text-[18px] text-white font-semibold hover:text-red-700">
+                <p
+                  onClick={handleSignOut}
+                  className="flex gap-2 items-center text-[18px] text-white font-semibold hover:text-red-700"
+                >
                   <VscSignOut />
                   SignOut
                 </p>

@@ -14,7 +14,7 @@ function Home() {
   useEffect(() => {
     const urlparams = new URLSearchParams(window.location.search);
     const search = urlparams.get("query");
-    if (search == "" || search == null) {
+    if (search == "" || search == null || search == "All") {
       const getAllVideos = async () => {
         const res = await fetch(
           "http://localhost:6060/api/v1/user/video/getAllVideos"
@@ -43,7 +43,7 @@ function Home() {
           <FilterCard data={data} />
         ))}
       </div>
-      <div className=" grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-y-6 gap-x-6 place-items-center mr-5">
+      <div className=" grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-y-6 gap-x-5 place-items-center mr-5">
         {videos?.map((v) => (
           // console.log(v)
           <VideoCard video={v} />

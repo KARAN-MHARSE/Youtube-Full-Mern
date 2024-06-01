@@ -21,7 +21,9 @@ function Subscription() {
   }, []);
   return (
     <div className="w-full text-white">
-      <h1 className={`${!videos && "hidden"} text-2xl font-bold`}>Latest</h1>
+      <h1 className={`${!videos && "hidden"} text-2xl font-bold mb-4`}>
+        Latest
+      </h1>
       {/* Video card */}
       <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4">
         {videos ? (
