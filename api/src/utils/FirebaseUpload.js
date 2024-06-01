@@ -10,7 +10,7 @@ admin.initializeApp({
 const bucket = admin.storage().bucket();
 
 const uploadToFirebase = async (filePath, bucketName) => {
-  console.log(filePath);
+  // console.log(filePath);
   const videoRef = bucket.file(`${bucketName}/${filePath.originalname}`);
   const stream = fs.createReadStream(filePath.path);
 

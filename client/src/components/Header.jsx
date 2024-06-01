@@ -55,11 +55,12 @@ function Header() {
           </h1>
         </div>
       </Link>
+      {/* Middle part */}
       <div id="middle" className="flex items-center gap-3">
         <div
           className={`${
             smallScreenSearch ? "inline-block" : "hidden"
-          } sm:flex md:w-[420px] w-[180px]  items-center border border-lightText rounded-2xl overflow-hidden`}
+          } sm:flex lg:w-[420px] md:w-[350px] sm:[300px] w-[160px]  items-center border border-lightText rounded-2xl overflow-hidden`}
         >
           <form onSubmit={handleSearch} className="flex">
             <input

@@ -23,7 +23,6 @@ const uploadVideo = AsyncHandler(async (req, res) => {
   const videoUrl1 = await uploadOnCloudinary(videoLocalPath);
   const thumbnailUrl1 = await uploadOnCloudinary(thumbnailLocalPath);
 
-  console.log(videoUrl1);
   videoUrl = videoUrl1.url;
   thumbnailUrl = thumbnailUrl1.url;
   // console.log(videoUrl)
@@ -48,7 +47,22 @@ const uploadVideo = AsyncHandler(async (req, res) => {
 });
 
 const getAllVideos = AsyncHandler(async (req, res) => {
-  const video = await Video.find({});
+  const video = await Video.aggregate([
+    {
+      $lookup: {
+        from: "users",
+        localField: "owner",
+        foreignField: "_id",
+        as: "result",
+      },
+    },
+    {
+      $addFields: {
+        ownerProfile: { $arrayElemAt: ["$result.profile", 0] },
+        ownerName: { $arrayElemAt: ["$result.userName", 0] },
+      },
+    },
+  ]);
 
   res.status(200).json({
     success: true,
@@ -60,7 +74,6 @@ const getAllVideos = AsyncHandler(async (req, res) => {
 const getVideoById = AsyncHandler(async (req, res) => {
   const { videoId } = req.params;
   const { currentUser } = req.body;
-  console.log(req.body);
 
   const videoData = await Video.aggregate([
     {
@@ -129,7 +142,7 @@ const getVideoById = AsyncHandler(async (req, res) => {
 const doComment = AsyncHandler(async (req, res) => {
   const { videoId } = req.params;
   const { commentBy, comment } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
 
   if (!commentBy) {
     throw new ApiError(404, "Unauthorized user");
@@ -209,7 +222,6 @@ const getVideoComments = AsyncHandler(async (req, res) => {
 });
 
 const addWatchVideo = AsyncHandler(async (req, res) => {
-  console.log(req.params);
   const { videoId } = req.params;
   const { currentUserId } = req.body;
 
@@ -274,7 +286,7 @@ const Trial = AsyncHandler(async (req, res) => {
 
 const searchVideos = AsyncHandler(async (req, res) => {
   const { search } = req.params;
-  console.log(search);
+  // console.log(search);
 
   const video = await Video.find({
     title: { $regex: search, $options: "i" },

@@ -5,7 +5,6 @@ const Like = require("../models/like.model");
 const doLike = AsyncHandler(async (req, res) => {
   const { videoId } = req.params;
   const { userId } = req.body;
-  console.log(userId);
 
   if (!videoId || !userId) {
     throw new ApiError(400, "all fields are required");
