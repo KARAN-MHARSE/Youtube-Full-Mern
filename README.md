@@ -24,7 +24,7 @@ This project is a fully functional YouTube clone, developed to replicate the cor
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/youtube-clone.git
+   git clone https://github.com/KARAN-MHARSE/Youtube-Full-Mern.git
    cd youtube-clone
 
 2. **Install dependencies::**
