@@ -32,10 +32,7 @@ function SubscriptionVideoCard({ video }) {
             </h2>
             <p className="text-[13px] -mt-[3px]">{video._id.ownerName}</p>
             <p className="text-[13px] -mt-[3px]">
-              32k views -{" "}
-              <span>
-                {formatDate((<video src="" className="_id"></video>).createdAt)}
-              </span>
+              32k views - <span>{formatDate(video._id.createdAt)}</span>
             </p>
           </div>
           <SlOptionsVertical color="white" />

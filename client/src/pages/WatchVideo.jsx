@@ -147,6 +147,7 @@ function WatchVideo() {
             <video
               autoPlay
               controls
+              controlsList="nodownload"
               className="size-full rounded-lg max-h-[450px] object-contain bg-cardBg"
               src={videoData.video.videoUrl}
               alt=""
@@ -227,7 +228,7 @@ function WatchVideo() {
                         {video.ownerName}
                       </p>
                       <div className="text-[13px] flex gap-2 text-[#ffffff80]">
-                        <p>134k views .</p>
+                        <p>{video.watchCount} views .</p>
                         <p>{formatDate(video.createdAt)}</p>
                       </div>
                     </div>

@@ -34,7 +34,8 @@ function VideoCard({ video }) {
             </h2>
             <p className="text-[13px] -mt-[3px]">{video.ownerName}</p>
             <p className="text-[13px] -mt-[3px]">
-              32k views - <span>{formatDate(video.createdAt)}</span>
+              {video.watchCount} views -{" "}
+              <span>{formatDate(video.createdAt)}</span>
             </p>
           </div>
           <SlOptionsVertical color="white" />

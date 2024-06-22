@@ -57,9 +57,18 @@ const getAllVideos = AsyncHandler(async (req, res) => {
       },
     },
     {
+      $lookup: {
+        from: "users",
+        localField: "_id",
+        foreignField: "watchVideos.video",
+        as: "watchNumbers",
+      },
+    },
+    {
       $addFields: {
         ownerProfile: { $arrayElemAt: ["$result.profile", 0] },
         ownerName: { $arrayElemAt: ["$result.userName", 0] },
+        watchCount: { $size: "$watchNumbers" },
       },
     },
   ]);
