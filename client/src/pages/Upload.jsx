@@ -41,10 +41,13 @@ function Upload() {
       formData.append(key, videoData[key]);
     }
 
-    const res = await fetch("http://localhost:6060/api/v1/user/video/trial", {
-      method: "POST",
-      body: formData,
-    });
+    const res = await fetch(
+      "https://youtube-full-mern-1.onrender.com/api/v1/user/video/trial",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
     const data = await res.json();
     if (data.success) {
       navigate("/");

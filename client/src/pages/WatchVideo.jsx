@@ -33,7 +33,7 @@ function WatchVideo() {
     const start = async () => {
       // get specific video by id
       const res = await fetch(
-        `http://localhost:6060/api/v1/user/video//getVideoByID/${id}`,
+        `https://youtube-full-mern-1.onrender.com/api/v1/user/video//getVideoByID/${id}`,
         {
           method: "post",
         }
@@ -43,7 +43,7 @@ function WatchVideo() {
 
       // get all videos
       const res2 = await fetch(
-        "http://localhost:6060/api/v1/user/video/getAllVideos"
+        "https://youtube-full-mern-1.onrender.com/api/v1/user/video/getAllVideos"
       );
       const data2 = await res2.json();
 
@@ -53,7 +53,7 @@ function WatchVideo() {
       // add to watch  video
       if (currentUser) {
         const res3 = await fetch(
-          `http://localhost:6060/api/v1/user/video/getVideoByID/watchVideo/${id}`,
+          `https://youtube-full-mern-1.onrender.com/api/v1/user/video/getVideoByID/watchVideo/${id}`,
           {
             method: "POST",
             headers: {
@@ -78,7 +78,7 @@ function WatchVideo() {
 
     if (currentUser) {
       const res = await fetch(
-        "http://localhost:6060/api/v1/channel/subcription/doSubcribed",
+        "https://youtube-full-mern-1.onrender.com/api/v1/channel/subcription/doSubcribed",
         {
           method: "POST",
           headers: {
@@ -108,13 +108,16 @@ function WatchVideo() {
   const handleLike = async (e) => {
     e.preventDefault();
 
-    const res = await fetch(`http://localhost:6060/api/v1/like/${id}`, {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json", // Set the appropriate Content-Type header
-      },
-      body: JSON.stringify({ userId: currentUser._id }),
-    });
+    const res = await fetch(
+      `https://youtube-full-mern-1.onrender.com/api/v1/like/${id}`,
+      {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json", // Set the appropriate Content-Type header
+        },
+        body: JSON.stringify({ userId: currentUser._id }),
+      }
+    );
     const data = await res.json();
     alert(data.message);
   };
@@ -129,7 +132,7 @@ function WatchVideo() {
   //         commentBy:currentUser._id,
   //         comment:
   //     }
-  //     const res3 = await fetch(`http://localhost:6060/api/v1/user/video//getVideoByID/${id}`,{
+  //     const res3 = await fetch(`https://youtube-full-mern-1.onrender.com/api/v1/user/video//getVideoByID/${id}`,{
   //         method:"POST",
   //         headers:{
   //             'Content-Type':'application/json'

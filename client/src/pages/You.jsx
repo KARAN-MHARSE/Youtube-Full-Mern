@@ -16,7 +16,7 @@ function You() {
   useEffect(() => {
     const start = async () => {
       const res = await fetch(
-        "http://localhost:6060/api/v1/user/auth/getUserDetail",
+        "https://youtube-full-mern-1.onrender.com/api/v1/user/auth/getUserDetail",
         {
           method: "GET",
           credentials: "include",

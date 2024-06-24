@@ -17,7 +17,7 @@ function Register() {
 
     try {
       const res = await fetch(
-        "http://localhost:6060/api/v1/user/auth/register",
+        "https://youtube-full-mern-1.onrender.com/api/v1/user/auth/register",
         {
           method: "POST",
           headers: {

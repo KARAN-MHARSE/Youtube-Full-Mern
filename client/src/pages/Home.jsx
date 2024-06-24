@@ -17,7 +17,7 @@ function Home() {
     if (search == "" || search == null || search == "All") {
       const getAllVideos = async () => {
         const res = await fetch(
-          "http://localhost:6060/api/v1/user/video/getAllVideos",
+          "https://youtube-full-mern-1.onrender.com/api/v1/user/video/getAllVideos",
           {
             method: "GET",
             credentials: "include",
@@ -31,7 +31,7 @@ function Home() {
     } else {
       const getSearchVideoes = async () => {
         const res = await fetch(
-          `http://localhost:6060/api/v1/user/video/getVideos/search/${search}`
+          `https://youtube-full-mern-1.onrender.com/api/v1/user/video/getVideos/search/${search}`
         );
         const data = await res.json();
         setVideos(data.video);

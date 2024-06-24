@@ -26,14 +26,17 @@ function Login() {
 
     dispatch(signInStart());
 
-    const res = await fetch("http://localhost:6060/api/v1/user/auth/login", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json", // Specify JSON content type
-      },
-      body: JSON.stringify(formData),
-    });
+    const res = await fetch(
+      "https://youtube-full-mern-1.onrender.com/api/v1/user/auth/login",
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json", // Specify JSON content type
+        },
+        body: JSON.stringify(formData),
+      }
+    );
     const data = await res.json();
 
     if (data.success) {

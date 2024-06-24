@@ -14,7 +14,7 @@ function Subscription() {
   useEffect(() => {
     const fetchVideo = async () => {
       const res = await fetch(
-        `http://localhost:6060/api/v1/channel/subcription/subscribedchannel/videos`,
+        `https://youtube-full-mern-1.onrender.com/api/v1/channel/subcription/subscribedchannel/videos`,
         {
           method: "GET",
           credentials: "include",
