@@ -9,12 +9,16 @@ function Subscription() {
   const navigate = useNavigate();
   const [videos, setVideos] = useState();
   const { currentUser } = useSelector((state) => state);
-  console.log(videos);
+  // console.log(videos);
 
   useEffect(() => {
     const fetchVideo = async () => {
       const res = await fetch(
-        `http://localhost:6060/api/v1/channel/subcription/subscribedchannel/videos/${currentUser._id}`
+        `http://localhost:6060/api/v1/channel/subcription/subscribedchannel/videos`,
+        {
+          method: "GET",
+          credentials: "include",
+        }
       );
 
       const data = await res.json();

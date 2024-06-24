@@ -55,25 +55,26 @@ const login = AsyncHandler(async (req, res) => {
   }
 
   const token = await user.generateRefreshToken();
-  // console.log(token)
+  user.refreshToken = token;
+  await user.save({ validateBeforeSave: false });
 
   const loggedUser = await User.findById(user._id).select(
     "-password -refreshToken"
   );
-  const options = {
-    httpOnly: false, // Set to false to allow client-side access
-    secure: false, // Set to false for local development serve
-    maxAge: 31536000000, // 1 year
-  };
 
-  res.status(200).cookie("token", "token").json({
+  const options = {
+    httpOnly: false, // Makes the cookie inaccessible to JavaScript on the client side
+    secure: false, // Set to true if your site is served over HTTPS
+    maxAge: 5 * 24 * 60 * 60 * 1000, // Cookie will expire in 1 day (24 hours)
+  };
+  res.status(200).cookie("token", token).json({
     success: true,
     user: loggedUser,
   });
 });
 
 const getUserDetail = AsyncHandler(async (req, res) => {
-  const { userId } = req.params;
+  const userId = req.user._id;
 
   if (!userId) {
     throw new ApiError(400, "please login first");

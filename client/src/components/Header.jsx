@@ -5,7 +5,7 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { GoVideo } from "react-icons/go";
 import { BsBroadcast } from "react-icons/bs";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { signInSuccess } from "../redux/user/userSlice";
 import { setIsSignInPage } from "../redux/user/userSlice";
@@ -16,13 +16,29 @@ function Header() {
   const [smallScreenSearch, setSmallScreenSearch] = useState(true);
   // console.log(smallScreenSearch);
   const [searchInput, setSearchInput] = useState();
-  const user = useSelector((state) => state.currentUser);
+  const [user, setUser] = useState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // console.log(user)
 
   const [uploadPopUp, setUploadPopUp] = useState(false);
   const [showProfikePopUp, setShowProfilePopUp] = useState(false);
+
+  useEffect(() => {
+    const start = async () => {
+      const res = await fetch(
+        "http://localhost:6060/api/v1/user/auth/getUserDetail",
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
+      const data = await res.json();
+      setUser(data.user[0]);
+      // console.log();
+    };
+    start();
+  }, []);
 
   // When user click on any thing expent login button then setIsSign false
   const setIsLogin = (e) => {

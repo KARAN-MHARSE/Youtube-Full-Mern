@@ -17,7 +17,11 @@ function Home() {
     if (search == "" || search == null || search == "All") {
       const getAllVideos = async () => {
         const res = await fetch(
-          "http://localhost:6060/api/v1/user/video/getAllVideos"
+          "http://localhost:6060/api/v1/user/video/getAllVideos",
+          {
+            method: "GET",
+            credentials: "include",
+          }
         );
         const data = await res.json();
         setVideos(data.video);

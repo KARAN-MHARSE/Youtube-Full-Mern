@@ -1,5 +1,5 @@
 function YouHeader({ user }) {
-  console.log();
+  // console.log();
   return (
     <div className="text-white">
       <div className="flex gap-3 items-center">

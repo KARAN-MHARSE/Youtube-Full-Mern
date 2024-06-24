@@ -28,11 +28,12 @@ const doSubscribed = AsyncHandler(async (req, res) => {
 
 const getSubscribedChannelVideos = AsyncHandler(async (req, res) => {
   const { userId } = req.params;
+  console.log(req.user);
 
   const video = await User.aggregate([
     {
       $match: {
-        _id: new ObjectId(userId),
+        _id: new ObjectId(req?.user?._id),
       },
     },
     {
@@ -98,7 +99,6 @@ const getSubscribedChannelVideos = AsyncHandler(async (req, res) => {
     },
   ]);
 
-  console.log(video.length);
   if (video.length == 0) {
     throw new ApiError(400, "Please suscribed first");
   }

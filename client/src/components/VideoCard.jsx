@@ -2,9 +2,6 @@ import { SlOptionsVertical } from "react-icons/sl";
 import { Link } from "react-router-dom";
 
 function VideoCard({ video }) {
-  console.log(video);
-  // console.log(video.createdAt);
-
   const formatDate = (dateString) => {
     const dateObj = new Date(dateString);
     return dateObj.toLocaleDateString("en-US", {

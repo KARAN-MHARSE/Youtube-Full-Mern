@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { SlOptionsVertical } from "react-icons/sl";
 
 function SubscriptionVideoCard({ video }) {
-  console.log(video._id);
+  // console.log(video._id);
   const formatDate = (dateString) => {
     const dateObj = new Date(dateString);
     return dateObj.toLocaleDateString("en-IN", {

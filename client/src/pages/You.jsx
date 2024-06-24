@@ -14,18 +14,20 @@ function You() {
   // console.log(userData.user[0].watchVideos);
 
   useEffect(() => {
-    if (currentUser) {
-      const start = async () => {
-        const res = await fetch(
-          `http://localhost:6060/api/v1/user/auth/getUserDetail/${currentUser._id}`
-        );
-        const data = await res.json();
-        // console.log(data);
-        // console.log(data.user[0].watchVideos);
-        setUserData(data);
-      };
-      start();
-    }
+    const start = async () => {
+      const res = await fetch(
+        "http://localhost:6060/api/v1/user/auth/getUserDetail",
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
+      const data = await res.json();
+      console.log(data);
+      // console.log(data.user[0].watchVideos);
+      setUserData(data);
+    };
+    start();
   }, []);
 
   return (
