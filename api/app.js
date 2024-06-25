@@ -10,7 +10,7 @@ const { connect } = require("./src/DB/connection");
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://karan-youtube-clone.netlify.app",
     credentials: true,
   })
 );
