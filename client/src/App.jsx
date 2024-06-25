@@ -11,6 +11,7 @@ import Register from "./pages/Register";
 import WatchVideo from "./pages/WatchVideo";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Footer from "./components/Footer";
 
 function App() {
   const reduxData = useSelector((state) => state.isSignInPage);
@@ -34,6 +35,8 @@ function App() {
           <Route path="/watch/:id" element={<WatchVideo />} />
         </Routes>
       </div>
+      {/* for small devices */}
+      <Footer />
     </BrowserRouter>
   );
 }

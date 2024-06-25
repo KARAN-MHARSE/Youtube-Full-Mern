@@ -13,7 +13,7 @@ import { VscSignOut } from "react-icons/vsc";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
 function Header() {
-  const [smallScreenSearch, setSmallScreenSearch] = useState(true);
+  const [smallScreenSearch, setSmallScreenSearch] = useState(false);
   // console.log(smallScreenSearch);
   const [searchInput, setSearchInput] = useState();
   const [user, setUser] = useState();
@@ -84,7 +84,7 @@ function Header() {
         <div
           className={`${
             smallScreenSearch ? "inline-block" : "hidden"
-          } sm:flex lg:w-[420px] md:w-[350px] sm:[300px] w-[160px]  items-center border border-lightText rounded-2xl overflow-hidden`}
+          } sm:flex lg:w-[420px] md:w-[350px] sm:[300px] w-[150px]  items-center border border-lightText rounded-2xl overflow-hidden`}
         >
           <form onSubmit={handleSearch} className="flex">
             <input
@@ -115,13 +115,16 @@ function Header() {
         >
           <BiSearch color="white" size="25px" />
         </div>
-        <AiOutlineVideoCameraAdd
-          color="white"
-          size="25px"
-          onClick={() => {
-            setUploadPopUp(!uploadPopUp);
-          }}
-        />
+        <div className="hidden sm:inline-block">
+          <AiOutlineVideoCameraAdd
+            color="white"
+            size="25px"
+            onClick={() => {
+              setUploadPopUp(!uploadPopUp);
+            }}
+          />
+        </div>
+
         {/* when user click on add video popup */}
         <div
           className={`bg-[#282828] text-white text-[15px] p-3 absolute top-14 rounded-lg ${
@@ -154,7 +157,10 @@ function Header() {
           </Link>
         </div>
         {/* End of popup */}
-        <IoMdNotificationsOutline color="white" size="25px" />
+        <div className="hidden sm:inline-block">
+          <IoMdNotificationsOutline color="white" size="25px" />
+        </div>
+
         {user ? (
           <div>
             <div

@@ -42,7 +42,7 @@ function Register() {
   };
 
   return (
-    <div className=" max-w-lg mx-auto p-3 w-full py-16">
+    <div className=" max-w-lg flex flex-col mx-auto p-3 w-full py-16">
       <div className="flex items-center justify-center w-[80%]">
         <h1 className="my-7 font-semibold text-3xl text-white">Sign Up</h1>
       </div>

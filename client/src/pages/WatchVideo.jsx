@@ -78,7 +78,7 @@ function WatchVideo() {
 
     if (currentUser) {
       const res = await fetch(
-        "https://youtube-full-mern-1.onrender.com/api/v1/channel/subcription/doSubcribed",
+        "https://youtube-full-mern-1.onrender.com//api/v1/channel/subcription/doSubcribed",
         {
           method: "POST",
           headers: {
@@ -132,7 +132,7 @@ function WatchVideo() {
   //         commentBy:currentUser._id,
   //         comment:
   //     }
-  //     const res3 = await fetch(`https://youtube-full-mern-1.onrender.com/api/v1/user/video//getVideoByID/${id}`,{
+  //     const res3 = await fetch(`https://youtube-full-mern-1.onrender.com//api/v1/user/video//getVideoByID/${id}`,{
   //         method:"POST",
   //         headers:{
   //             'Content-Type':'application/json'
@@ -157,18 +157,20 @@ function WatchVideo() {
             />
             <h2 className="my-3 font-semibold">{videoData.video.title}</h2>
             {/* VideoInfo */}
-            <div className="videoInfo flex justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <div className="text-white font-semibold bg-blue-500 size-[30px] flex items-center justify-center rounded-full">
-                  {/* <p>{videoData.video.userName.charAt(0).toUpperCase()}</p> */}
-                </div>
-                <div>
-                  <h1 className="text-[15px] font-semibold">
-                    {videoData.video.userName}
-                  </h1>
-                  <p className=" text-[12px] text-[#ffffff80] whitespace-nowrap">
-                    {videoData.video.totalSubscribers} Subscribers
-                  </p>
+            <div className="videoInfo flex flex-col sm:flex-row justify-between gap-3">
+              <div className="flex justify-between  items-center gap-3">
+                <div className="flex gap-2 items-center sm:justify-normal">
+                  <div className="text-white font-semibold bg-blue-500 size-[30px] flex items-center justify-center rounded-full">
+                    <p>{videoData.video.userName.charAt(0).toUpperCase()}</p>
+                  </div>
+                  <div>
+                    <h1 className="text-[15px] font-semibold">
+                      {videoData.video.userName}
+                    </h1>
+                    <p className=" text-[12px] text-[#ffffff80] whitespace-nowrap">
+                      {videoData.video.totalSubscribers} Subscribers
+                    </p>
+                  </div>
                 </div>
                 <button
                   onClick={checkAndSubscribe}
@@ -179,19 +181,19 @@ function WatchVideo() {
               </div>
               <div className="flex gap-3">
                 <div
-                  className="flex gap-2 bg-cardBg px-3  items-center rounded-[50px] cursor-pointer"
+                  className="flex gap-1 bg-cardBg px-3 py-1  items-center rounded-[50px] cursor-pointer"
                   onClick={handleLike}
                 >
                   <AiOutlineLike />
                   <p>14k</p>
                 </div>
-                <div className="flex gap-2 bg-cardBg px-3  items-center rounded-[50px]">
+                <div className="flex gap-1 bg-cardBg px-3  items-center rounded-[50px]">
                   <RiShareForwardLine />
                   <p>Share</p>
                 </div>
                 <div
                   onClick={() => handleDownload(videoData.video.videoUrl)}
-                  className="flex gap-2 bg-cardBg px-3  items-center hidden sm:flex rounded-[50px] cursor-pointer"
+                  className="flex gap-1 bg-cardBg px-3  items-center  sm:flex rounded-[50px] cursor-pointer"
                 >
                   <IoDownloadOutline />
                   <p>Download</p>
@@ -209,7 +211,7 @@ function WatchVideo() {
             <Comment likeSendData={likeSendData} />
           </div>
         )}
-
+        {/* --------------------------------------------------------------------------------------------------------------- */}
         {/* Right Side */}
         {videoList && (
           <div className="lg:basis:[25%] lg:max-w-[70vh] overflow-y-auto hideScrollbar ">
@@ -219,7 +221,7 @@ function WatchVideo() {
                 <Link to={`http://localhost:5173/watch/${video._id}`}>
                   <div className="flex gap-3 mb-3">
                     <img
-                      className="basis-[50%] max-w-[280px] rounded-lg"
+                      className="w-[50%] max-w-[280px] rounded-lg"
                       src={video.thumbnailUrl}
                       alt=""
                     />

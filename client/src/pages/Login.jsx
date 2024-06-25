@@ -50,7 +50,7 @@ function Login() {
   };
   // console.log(formData)
   return (
-    <div className=" max-w-lg mx-auto p-3 w-full py-16">
+    <div className=" max-w-lg mx-auto flex flex-col items-center p-3 w-full py-16">
       <div className="flex items-center justify-center w-[80%]">
         <h1 className="my-7 font-semibold text-3xl text-white">Sign In</h1>
       </div>

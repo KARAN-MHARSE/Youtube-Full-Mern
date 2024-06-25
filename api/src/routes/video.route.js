@@ -50,7 +50,7 @@ router.route("/getVideoByID/doComment/:videoId").post(doComment);
 router.route("/getVideoByID/getComment/:videoId").get(getVideoComments);
 router.route("/getVideoByID/watchVideo/:videoId").post(addWatchVideo);
 
-// https://youtube-full-mern-1.onrender.com/api/v1/user/video/getVideoByID/watchVideo/662fb4bd172f35e74558a9a5
+// https://youtube-full-mern-1.onrender.com//api/v1/user/video/getVideoByID/watchVideo/662fb4bd172f35e74558a9a5
 
 // router.route('/getVideo/:videoId').get(karan)
 

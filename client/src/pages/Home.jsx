@@ -47,7 +47,7 @@ function Home() {
           <FilterCard data={data} />
         ))}
       </div>
-      <div className=" grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-y-6 gap-x-5 place-items-center mr-5">
+      <div className=" grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-y-6 sm:gap-x-5 gap-x-2 place-items-center mr-5">
         {videos?.map((v) => (
           // console.log(v)
           <VideoCard video={v} />
