@@ -5,7 +5,8 @@ const User = require("../models/user.model");
 const { ObjectId } = require("mongoose").Types;
 
 const doSubscribed = AsyncHandler(async (req, res) => {
-  const { ownerId, currentUserId } = req.body;
+  const { ownerId } = req.body;
+  const currentUserId = req.user?._id;
   // console.log(ownerId)
 
   const alreadySubscribed = await Subscription.findOne({

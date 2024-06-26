@@ -7,7 +7,7 @@ const {
   getSubscribedChannelVideos,
 } = require("../controllers/subscription.controller");
 
-router.route("/doSubcribed").post(doSubscribed);
+router.route("/doSubcribed").post(verifyJwt, doSubscribed);
 // router
 //   .route("/subscribedchannel/videos/:userId")
 //   .get(getSubscribedChannelVideos);

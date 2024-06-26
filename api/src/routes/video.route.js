@@ -45,7 +45,10 @@ router.route("/trial").post(
 
 router.route("/getAllVideos").get(getAllVideos);
 router.route("/getVideos/search/:search").get(searchVideos);
-router.route("/getVideoByID/:videoId").post(getVideoById).post(doComment);
+router
+  .route("/getVideoByID/:videoId")
+  .post(verifyJwt, getVideoById)
+  .post(doComment);
 router.route("/getVideoByID/doComment/:videoId").post(doComment);
 router.route("/getVideoByID/getComment/:videoId").get(getVideoComments);
 router.route("/getVideoByID/watchVideo/:videoId").post(addWatchVideo);

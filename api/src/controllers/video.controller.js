@@ -83,6 +83,7 @@ const getAllVideos = AsyncHandler(async (req, res) => {
 const getVideoById = AsyncHandler(async (req, res) => {
   const { videoId } = req.params;
   const { currentUser } = req.body;
+  console.log(req.user);
 
   const videoData = await Video.aggregate([
     {
@@ -113,11 +114,15 @@ const getVideoById = AsyncHandler(async (req, res) => {
         profile: { $arrayElemAt: ["$result.profile", 0] },
         ownerID: { $arrayElemAt: ["$result._id", 0] },
         totalSubscribers: { $size: "$subscribers" },
-        // isSubscribed: {
-        //   $cond: {
-        //     // if:{$in:[]}
-        //   },
-        // },
+        isSubscribed: {
+          $cond: {
+            if: {
+              $in: [new ObjectId(req.user?._id), "$subscribers.subscriber"],
+            },
+            then: true,
+            else: false,
+          },
+        },
       },
     },
     {

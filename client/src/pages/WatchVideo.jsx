@@ -6,20 +6,26 @@ import { GiTakeMyMoney } from "react-icons/gi";
 import { BsThreeDots } from "react-icons/bs";
 import { BiMoneyWithdraw } from "react-icons/bi";
 import { Link, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import DesciptionBox from "../components/DesciptionBox";
+import { IoIosNotificationsOutline } from "react-icons/io";
 import Comment from "../components/Comment";
 import "../pages/Home.css";
+import SharePopUp from "../components/SharePopUp";
 
 function WatchVideo() {
   const { id } = useParams();
   console.log(id);
-  const { currentUser } = useSelector((state) => state);
-  // console.log(currentUser);
+  const { currentUser, showSharePopup } = useSelector((state) => state);
+  const [subscribed, setSubscribed] = useState(false);
+  const [sharePopUp, setSharePopUp] = useState(false);
   const [videoData, setVideoData] = useState(null);
+  console.log(videoData);
   const [videoList, setVideoList] = useState();
   const [comment, setComment] = useState();
+  const dispatch = useDispatch();
 
+  console.log(subscribed);
   const formatDate = (dateString) => {
     const dateObj = new Date(dateString);
     return dateObj.toLocaleDateString("en-US", {
@@ -28,18 +34,23 @@ function WatchVideo() {
       day: "2-digit",
     });
   };
+  const handleSharePopUp = () => {
+    dispatch();
+  };
 
   useEffect(() => {
     const start = async () => {
       // get specific video by id
       const res = await fetch(
-        `https://youtube-full-mern-1.onrender.com/api/v1/user/video//getVideoByID/${id}`,
+        `https://youtube-full-mern-1.onrender.com/api/v1/user/video/getVideoByID/${id}`,
         {
           method: "post",
+          credentials: "include",
         }
       );
       const data = await res.json();
       setVideoData(data);
+      setSubscribed(data.video?.isSubscribed);
 
       // get all videos
       const res2 = await fetch(
@@ -76,22 +87,20 @@ function WatchVideo() {
       currentUserId: currentUser._id,
     };
 
-    if (currentUser) {
-      const res = await fetch(
-        "https://youtube-full-mern-1.onrender.com//api/v1/channel/subcription/doSubcribed",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json", // Specify JSON content type
-          },
-          body: JSON.stringify(subScriptionData),
-        }
-      );
-      const data = await res.json();
-      alert(data.message);
-    } else {
-      alert("Firstly do login");
-    }
+    const res = await fetch(
+      "https://youtube-full-mern-1.onrender.com/api/v1/channel/subcription/doSubcribed",
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json", // Specify JSON content type
+        },
+        body: JSON.stringify(subScriptionData),
+      }
+    );
+    const data = await res.json();
+    setSubscribed(!subscribed);
+    alert(data.message);
   };
 
   const handleDownload = (videoLink) => {
@@ -172,12 +181,24 @@ function WatchVideo() {
                     </p>
                   </div>
                 </div>
-                <button
-                  onClick={checkAndSubscribe}
-                  className="bg-cardBg text-sm font-semibold px-3 py-2 rounded-3xl"
-                >
-                  Subscribed
-                </button>
+                <div>
+                  {subscribed ? (
+                    <button
+                      onClick={checkAndSubscribe}
+                      className="bg-cardBg text-sm font-semibold px-3 py-2 rounded-3xl flex items-center gap-1"
+                    >
+                      <IoIosNotificationsOutline size="18" />
+                      Subscribed
+                    </button>
+                  ) : (
+                    <button
+                      onClick={checkAndSubscribe}
+                      className="bg-cardBg text-sm font-semibold px-3 py-2 rounded-3xl"
+                    >
+                      Do subscribe
+                    </button>
+                  )}
+                </div>
               </div>
               <div className="flex gap-3">
                 <div
@@ -187,7 +208,10 @@ function WatchVideo() {
                   <AiOutlineLike />
                   <p>14k</p>
                 </div>
-                <div className="flex gap-1 bg-cardBg px-3  items-center rounded-[50px]">
+                <div
+                  onClick={() => setSharePopUp(!sharePopUp)}
+                  className=" cursor-pointer flex gap-1 bg-cardBg px-3  items-center rounded-[50px]"
+                >
                   <RiShareForwardLine />
                   <p>Share</p>
                 </div>
@@ -206,6 +230,14 @@ function WatchVideo() {
                   <BsThreeDots />
                 </div>
               </div>
+              {/* Share popup---------------------------------------------------------------------------------------------- */}
+              <div
+                className={`absolute right-5 mt-16 ${
+                  sharePopUp ? "inline-block" : "hidden"
+                }`}
+              >
+                <SharePopUp />
+              </div>
             </div>
             <DesciptionBox desc={videoData.video.description} />
             <Comment likeSendData={likeSendData} />
@@ -218,7 +250,7 @@ function WatchVideo() {
             {/* card */}
             {videoList.video.map((video) => (
               <div>
-                <Link to={`http://localhost:5173/watch/${video._id}`}>
+                <Link to={`/watch/${video._id}`}>
                   <div className="flex gap-3 mb-3">
                     <img
                       className="w-[50%] max-w-[280px] rounded-lg"

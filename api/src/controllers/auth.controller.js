@@ -67,7 +67,7 @@ const login = AsyncHandler(async (req, res) => {
     secure: false, // Set to true if your site is served over HTTPS
     maxAge: 5 * 24 * 60 * 60 * 1000, // Cookie will expire in 1 day (24 hours)
   };
-  res.status(200).cookie("token", token).json({
+  res.status(200).cookie("token", token, options).json({
     success: true,
     user: loggedUser,
   });
