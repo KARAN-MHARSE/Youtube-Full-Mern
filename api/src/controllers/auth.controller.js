@@ -63,8 +63,9 @@ const login = AsyncHandler(async (req, res) => {
   );
 
   const options = {
-    httpOnly: false, // Makes the cookie inaccessible to JavaScript on the client side
-    secure: false, // Set to true if your site is served over HTTPS
+    httpOnly: true, // Makes the cookie inaccessible to JavaScript on the client side
+    secure: true, // Set to true if your site is served over HTTPS
+    sameSite: 'None',
     maxAge: 5 * 24 * 60 * 60 * 1000, // Cookie will expire in 1 day (24 hours)
   };
   res.status(200).cookie("token", token, options).json({
